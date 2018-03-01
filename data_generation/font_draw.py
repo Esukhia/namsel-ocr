@@ -9,7 +9,6 @@ import sys
 from scipy.ndimage.filters import gaussian_filter
 import cv2
 from scipy.ndimage.morphology import binary_erosion
-import multiprocessing
 from random import randint
 import os
 
@@ -18,6 +17,9 @@ from yik import *
 from utils import add_padding
 
 import platform
+
+if platform.system() != "Windows":
+    import multiprocessing
 
 #num, punctuation, vowels1, 
 
@@ -385,6 +387,6 @@ def gen_img_rows(outfile, parallel=True):
 
 if __name__ == '__main__':
     if platform.system() == "Windows":
-        gen_img_rows(r'..\datasets\font-draw-samples.txt')
+        gen_img_rows(r'..\datasets\font-draw-samples.txt', False)
     else:
         gen_img_rows('../datasets/font-draw-samples.txt')

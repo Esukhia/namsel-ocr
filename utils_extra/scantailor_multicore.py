@@ -1,11 +1,13 @@
 #! /usr/bin/env python
 
 from subprocess import Popen
-from multiprocessing import Pool, cpu_count
 import sys
 import glob
 import os
 from functools import partial
+
+if platform.system() != "Windows":
+    from multiprocessing import Pool, cpu_count
 
 def process_tifs(fl, threshold, layout=1):
     """
@@ -58,11 +60,15 @@ def run_scantailor(folder, threshold, layout='single', processes=None):
         layout = 2
     
     process_tifs2 = partial(process_tifs, threshold=threshold, layout=layout)
-    if not processes:
-        processes = cpu_count()
-    p = Pool(processes=processes, maxtasksperchild=30)
-    p.map(process_tifs2, tifs)
-    p.terminate()
+
+    if platform.system() == "Windows":
+        map(process_tifs2, tifs)
+    else:
+        if not processes:
+            processes = cpu_count()
+        p = Pool(processes=processes, maxtasksperchild=30)
+        p.map(process_tifs2, tifs)
+        p.terminate()
     
 
 if __name__ == '__main__':

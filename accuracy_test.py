@@ -7,7 +7,6 @@ from feature_extraction import get_zernike_moments, get_hu_moments, \
     extract_features, normalize_and_extract_features
 from functools import partial
 import glob
-from multiprocessing.pool import Pool
 import numpy as np
 import os
 from sklearn.externals import joblib
@@ -16,6 +15,9 @@ from transitions import transition_features
 from fast_utils import fnormalize, ftrim
 
 import platform
+
+if platform.system() != "Windows":
+    from multiprocessing.pool import Pool
 
 cls = load_cls('logistic-cls')
 
@@ -80,8 +82,12 @@ def test_all(clsf=None):
     test_accuracy(keys[0], clsf)
     
     test_all = partial(test_accuracy, clsf=clsf)
-    p = Pool()
-    all_samples = p.map(test_all, keys)
+
+    if platform.system() == "Windows":
+        all_samples = map(test_all, keys)
+    else:
+        p = Pool()
+        all_samples = p.map(test_all, keys)
         
     for t, s in zip(keys, all_samples):
         print t, s
