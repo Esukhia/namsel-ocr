@@ -93,7 +93,12 @@ class PageElements(object):
         uint8 = np.uint8
         predict = fast_cls.predict
         predict_proba = fast_cls.predict_proba
-        self.contours, self.hierarchy = self._contours()
+        
+        if platform.system() == "Linux":
+            self.contours, self.hierarchy = self._contours()
+        else:
+            _, self.contours, self.hierarchy = self._contours()
+        
         self.boxes = []
         self.indices = []
         self.small_coef = small_coef
@@ -443,7 +448,11 @@ class PageElements(object):
 #        self._draw_new_page()
 
     def update_shapes(self):
-        self.contours, self.hierarchy = self._contours()
+        if platform.system() == "Linux":
+            self.contours, self.hierarchy = self._contours()
+        else:
+            _, self.contours, self.hierarchy = self._contours()
+        
         self.boxes = self._boxes()
         self._set_shape_measurements()
         self.indices = [i for i, b in enumerate(self.get_boxes()) if (
@@ -815,7 +824,11 @@ class PageElements(object):
 #        a = cv.GaussianBlur(a, (5, 5), 0)
 #        a = self.img_arr.copy()
 #         n = np.ones_like(a)
-        contours, hierarchy = cv.findContours(a.copy(), mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_SIMPLE)
+        
+        if platform.system() == "Linux":
+            contours, hierarchy = cv.findContours(a.copy(), mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_SIMPLE)
+        else:
+            _, contours, hierarchy = cv.findContours(a.copy(), mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_SIMPLE)
         
         
         ## Most of this logic for identifying rectangles comes from the 
