@@ -9,7 +9,12 @@ import numpy as np
 from utils import create_unique_id, local_file
 from collections import Counter
 
-CONF_DIR = './confs'
+import platform
+
+if platform.system() == "Windows":
+    CONF_DIR = r'.\confs'
+else:
+    CONF_DIR = './confs'
 
 if not os.path.exists(CONF_DIR):
     os.mkdir(CONF_DIR)

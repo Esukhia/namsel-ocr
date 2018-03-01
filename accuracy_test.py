@@ -15,12 +15,17 @@ from sobel_features import sobel_features
 from transitions import transition_features
 from fast_utils import fnormalize, ftrim
 
+import platform
+
 cls = load_cls('logistic-cls')
 
 # Load testing sets
 print 'Loading test data'
 
-tsets = pickle.load(open('datasets/testing/training_sets.pkl', 'rb'))
+if platform.system() == "Windows":
+    tsets = pickle.load(open(r'datasets\testing\training_sets.pkl', 'rb'))
+else:
+    tsets = pickle.load(open('datasets/testing/training_sets.pkl', 'rb'))
 
 scaler = joblib.load('zernike_scaler-latest')
 

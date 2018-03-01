@@ -11,6 +11,8 @@ from zernike_moments import zernike_features
 import os
 from utils import local_file
 
+import platform
+
 SCALER_PATH = 'zernike_scaler-latest'
 if os.path.exists(SCALER_PATH):
     scaler = joblib.load(local_file(SCALER_PATH))
@@ -39,9 +41,15 @@ sx = np.empty(ARR_SHAPE, np.double)
 sy = np.empty(ARR_SHAPE, np.double)
 x2 = np.zeros((192), np.int)
 
-D = pickle.load(open(local_file('features/D_matrix.pkl'),'r'))
-Bpqk = pickle.load(open(local_file('features/Bpqk17.pkl'), 'rb'))
-Ipi = pickle.load(open(local_file('features/Ipi32.pkl'),'rb'))
+if platform.system() == "Windows":
+    D = pickle.load(open(local_file(r'features\D_matrix.pkl'),'r'))
+    Bpqk = pickle.load(open(local_file(r'features\Bpqk17.pkl'), 'rb'))
+    Ipi = pickle.load(open(local_file(r'features\Ipi32.pkl'),'rb'))
+else:
+    D = pickle.load(open(local_file('features/D_matrix.pkl'),'r'))
+    Bpqk = pickle.load(open(local_file('features/Bpqk17.pkl'), 'rb'))
+    Ipi = pickle.load(open(local_file('features/Ipi32.pkl'),'rb'))
+
 Ipi = np.array(Ipi, Ipi.dtype, order='F')
 deg = 17
 # Mpqs = np.empty((deg+1,deg+1), np.double)
