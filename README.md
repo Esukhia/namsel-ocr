@@ -1,18 +1,37 @@
 # Namsel OCR
 An OCR application focused on machine-print Tibetan text
 
-Tested only on Ubuntu 14.04 and higher. 
+Tested on Ubuntu 14.04 and higher, Mac Os 10.13 High Sierra and Windows 7/10 (64bits).
 
 An overview of the Namsel project can be found in [our article in the journal Himalayan Linguistics](https://escholarship.org/uc/item/6d5781k5).
 
 Check out our library partner for already OCR'd digital text: http://tbrc.org. 
 
 ## Install:
+
+### On Linux:
 ```bash
 $ bash ubuntu_install.sh
 ```
 
-This will install required packages, build the cython modules, unpack datasets, and initiate training for the classifiers. Note that training (classify.py) takes up to an hour or more to complete.
+### On Mac:
+```bash
+$ bash mac_install.sh
+```
+scantailor-cli is installed by default in "/opt/local/bin". Remember to add it to your $PATH in order to call Scantailor for the preprocessing tasks.
+```bash
+$ export PATH="/opt/local/bin/:$PATH"
+```
+
+### On Windows:
+Open the console with the administrator privileges.
+
+The installation process will be able to work completely offline.
+```bash
+windows_install.bat
+```
+
+This will install the version 2.7 of Python (actually, the program is not compatible with Python 3), the required packages, build the cython modules, unpack datasets, and initiate training for the classifiers. Note that training (classify.py) takes up to an hour or more to complete.
 
 
 ## Quickstart
@@ -41,14 +60,14 @@ OCR will run and save the results in a file called ocr_output.txt.
 ## Preprocessing
 Prior to using Namsel, documents in the form of PDFs or images need to be preprocessed. Preprocessing typically involves cleaning up images and putting them in a format Namsel expects.
 
-###Scanning documents
+### Scanning documents
 If you are scanning the documents to be OCR'd yourself, here are some tips for improving chances of getting high quality OCR results:
 - Scan in black and white
 - Scan at a relatively high resolution (400-600 dpi)
 - Utilize the scanner's software to align and crop the pages. If your scanner software supports it, deskewing the page and removing empty borders and images can save time later on in the OCR process. (Scantailor, which is mentioned below, won't remove images, but will deskew (rotate) the page and remove empty borders).
 - Save images in TIFF format with sensible name (e.g. a sequences of numbers 001.tif, 002.tif, etc)
 
-###Preparing images from PDFs
+### Preparing images from PDFs
 If your original document is in PDF format, you will need to convert the individual PDF pages to black and white or grayscale jpg, tif, or png images. Black and white tif images are Namsel's preferred format.
 
 There are a variety of tools for converting a PDF to images. The "gs" command from the Ghostscript project is one.
@@ -61,7 +80,7 @@ $ gs -r600x600 -sDEVICE=tiffg4 -sOutputFile=ocr_%04d.tif -dBATCH -dNOPAUSE mytib
 
 This will convert all the pages in the pdf to tiff using the "Group 4" compression, which is the most compact form of TIFF compression for black and white images. If your pdf is in grayscale, replace "tiffg4" with "tiffgray." Images will be unpacked at the location where the bash script or gs is run unless you specify otherwise.
 
-###Preparing images using scantailor
+### Preparing images using scantailor
 [Scantailor](https://github.com/scantailor/scantailor) is an open source project for cleaning up scanned documents and preparing them for OCR. Essentially, it performs 5 core operations:
 - Page splitting
 - Deskewing
@@ -191,8 +210,8 @@ Rarely used. The number of iterations when dilating text in line cut. Increase t
 ### Optional: generate data yourself from fonts
 This is strictly optional. The provided datasets already include these datapoints. These commands are also run automatically if you run ubuntu_install.sh.
 
+#### On Linux or Mac
 Install fonts:
-
 ```bash
 $ cd namsel-ocr
 $ sudo apt-get install python-cairo
@@ -205,6 +224,15 @@ Generate the font-derived datasets:
 ```bash
 $ cd data_generation
 $ python font_draw.py
+```
+
+#### On Windows
+Install the fonts by copying them onto the C:\Windows\fonts\ directory.
+
+Generate the font-derived datasets:
+```bash
+cd data_generation
+python font_draw.py
 ```
 
 ### About the name
