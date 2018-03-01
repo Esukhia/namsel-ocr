@@ -31,14 +31,17 @@ sudo port install scantailor
 
 #Here we are! Namsel OCR
 python2 setup.py build_ext --inplace
+
 cd data_generation
 mkdir -p ~/.fonts/
-cp ./fonts/*ttf ~/.fonts
+unzip fonts.zip -d ~/.fonts
 fc-cache -f -v
 python2 font_draw.py
+
 cd ../datasets
 unzip datapickles.zip
+
 cd ..
 python2 classify.py
 
-echo -e '\nAll Done!\n\nRemember to add "/opt/local/bin" to your $PATH in order to call Scantailor for the preprocessing tasks:\n\n\texport PATH="/opt/local/bin/:$PATH"\n'.
+echo -e '\nAll Done!\n\nRemember to add "/opt/local/bin" to your $PATH in order to call Scantailor for the preprocessing tasks:\n\n\texport PATH="/opt/local/bin/:$PATH"\n'

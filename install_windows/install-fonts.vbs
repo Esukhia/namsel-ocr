@@ -2,7 +2,7 @@ Set objShellApp = CreateObject("Shell.Application")
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Const FONTS = &H14&
 Set objFolder = objShellApp.Namespace(FONTS)
-strNewFontsFolder = "..\data_generation\fonts"
+strNewFontsFolder = "\tmp\tibetan-fonts\"
 If objFSO.FolderExists(strNewFontsFolder) = True Then
 	For Each objFile In objFSO.GetFolder(strNewFontsFolder).Files
 		If Right(LCase(objFile.Name), 4) = ".ttf" Then

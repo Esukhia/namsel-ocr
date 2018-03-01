@@ -40,11 +40,14 @@ rem More stuffs
 echo Installing pip packages...
 cd packages
 c:\Python27\python -m pip install Cython-0.27.3-cp27-cp27m-win_amd64.whl numpy-1.14.1-cp27-none-win_amd64.whl opencv_contrib_python-3.4.0.12-cp27-cp27m-win_amd64.whl Pillow-5.0.0-cp27-cp27m-win_amd64.whl scikit_learn-0.18.1-cp27-cp27m-win_amd64.whl scipy-1.0.0-cp27-none-win_amd64.whl simplejson-3.13.2-cp27-cp27m-win_amd64.whl sklearn-0.0.tar.gz
-cd..
+cd ..
 
 Rem Fonts installation
-echo Installing the Tibetan fonts
+echo Installing the fonts
+mkdir \tmp
+unzip ..\data_generation\fonts.zip -d \tmp\tibetan-fonts
 cscript install-fonts.vbs
+rmdir \tmp\tibetan-fonts /s /q
 
 Rem Building Namsel
 echo Building Namsel...
@@ -52,7 +55,6 @@ cd ..
 c:\Python27\python setup.py build_ext --inplace
 
 echo Generating the datas...
-mkdir \tmp
 cd data_generation
 c:\Python27\python font_draw.py
 
@@ -61,3 +63,5 @@ cd ..\datasets
 
 cd ..
 c:\Python27\python classify.py
+
+echo. & echo.All Done! & echo. & echo.
