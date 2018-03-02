@@ -26,6 +26,8 @@ from scipy.signal import argrelmin
 from scipy.interpolate import UnivariateSpline, splrep, splev
 from collections import OrderedDict
 
+import platform
+
 class PageElements(object):
     '''Page Elements object - a representation of the tiff image as a set
     of elements (contours, bounding boxes) and measurements used for recognition

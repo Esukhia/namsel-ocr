@@ -469,7 +469,7 @@ class Segmenter(object):
                     if platform.system() == "Linux":
                         ctrs, hier = cv.findContours(s.copy(), mode=cv.RETR_TREE , method=cv.CHAIN_APPROX_NONE)
                     else:
-                        _, ctrs, hier = cv.findContours(s.copy(), mode=cv.RETR_TREE
+                        _, ctrs, hier = cv.findContours(s.copy(), mode=cv.RETR_TREE , method=cv.CHAIN_APPROX_NONE)
                     
                     bounding = map(boundingRect, ctrs)
                     for k, b in enumerate(bounding):

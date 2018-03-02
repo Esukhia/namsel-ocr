@@ -6,6 +6,8 @@ import glob
 import os
 from functools import partial
 
+import platform
+
 if platform.system() != "Windows":
     from multiprocessing import Pool, cpu_count
 

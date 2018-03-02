@@ -23,6 +23,8 @@ from termset import syllables
 import tempfile
 from subprocess import check_call
 
+import platform
+
 class FailedPageException(Exception):
     pass
 
