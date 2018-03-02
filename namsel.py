@@ -141,8 +141,10 @@ class PageRecognizer(object):
                 output.append(u'\n')
     
             out =  ''.join(output)
-            print out
-        
+            
+            if platform.system() != "Windows":
+                print out
+            
             if text:
                 results = out
             
