@@ -36,9 +36,11 @@ This will install the version 2.7 of Python (actually, the program is not compat
 
 ## Quickstart
 
+There are few aliases for calling Python, try out "python2" instead of "python" if any error occurs.
+
 To start, run preprocessing on folder of images:
 ```bash
-$ ./namsel.py preprocess ~/myfolder
+$ python namsel.py preprocess ~/myfolder
 ```
 
 This will save new, preprocessed image in ~/myfolder/out. Preprocessing will take a few minutes depending on how many CPUs you have available and how many images are in the folder.
@@ -46,13 +48,13 @@ This will save new, preprocessed image in ~/myfolder/out. Preprocessing will tak
 Next, run OCR. If pages are "book" (rather than "pecha") - style pages, do the following:
 
 ```bash
-$ ./namsel.py recognize-volume --page_type=book --format=text ~/myfolder/out
+$ python namsel.py recognize-volume --page_type=book --format=text ~/myfolder/out
 ```
 
 To OCR a single page, use the *recognize-page* command and specify a single page file:
 
 ```bash
-$ ./namsel.py recognize-page --page_type=book --format=text ~/myfolder/out/image-01.tif
+$ python namsel.py recognize-page --page_type=book --format=text ~/myfolder/out/image-01.tif
 ```
 
 OCR will run and save the results in a file called ocr_output.txt.
@@ -94,7 +96,7 @@ Scantailor has both a graphical and command line interface. The graphical interf
 
 Example:
 ```bash
-python scantailor_multicore.py <my-image-folder> [threshold (optional)]
+$ python scantailor_multicore.py <my-image-folder> [threshold (optional)]
 ```
 
 <my-image-folder> is a path to a directory containing tif or jpg images. Threshold controls how bold or thin to make strokes on the page. A threshold higher than 0 makes text more bold or thick. A threshold less than 0 makes it thin. Poorly inked prints sometime benefit from a threshold of 10-30. Low to medium resolution images converted to grayscale from color scans may benefit from thinning or a threshold of -10 to -40. 
@@ -123,7 +125,7 @@ $ done
 While it is not necessary to use Group 4 (G4) compression, for projects processing thousands of images, G4 format can greatly decrease the amount of disk storage required for images.
 
 ## OCR
-###Preprocessing options
+### Preprocessing options
 In addition to the above parameters, you can also set parameters for the Scantailor application (used with the "preprocessing" command):
 
 
@@ -140,7 +142,7 @@ The amount of thinning or thickening Scantailor will do. Good values are between
 Example command:
 
 ```bash
-$ ./namsel preprocess --layout=double --st_threshold=-15 /path/to/my-folder-of-tiffs
+$ python namsel preprocess --layout=double --st_threshold=-15 /path/to/my-folder-of-tiffs
 ```
 
 This command will run Scantailor on a folder of tiff-formatted images, command it to split double pages and apply thinning to the characters on the pages.
@@ -148,12 +150,12 @@ This command will run Scantailor on a folder of tiff-formatted images, command i
 To run Namsel, simply specify the action you'd like Namsel to take and point the the image or images you would like processed. For example, to OCR a single tif image, run:
 
 ```bash
-$ ./namsel recognize-page mytibetantextimage.tif
+$ python namsel recognize-page mytibetantextimage.tif
 ```
 
 For an entire volume:
 ```bash
-./namsel recognize-volume folder-of-tiff-images
+$ python namsel recognize-volume folder-of-tiff-images
 ```
 
 Other options are "preprocess" and "isolate-lines." Preprocessing is discussed below. "Isolate-lines" runs the Namsel pipeline, but only until the line separation stage and outputs the segmented lines as tif images in a directory called "separated-lines" that is created within the parent directory. (TO BE IMPLEMENTED)
