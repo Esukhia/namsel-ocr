@@ -9,13 +9,18 @@ Check out our library partner for already OCR'd digital text: http://tbrc.org.
 
 ## Install:
 ### Namsel_OCR is now on Docker!
+Namsel was built, trained and cleaned up to provide an instant use image availlable on any platforms!
 
-You can pull the image from the public repository:
-```bash
-$ docker pull thubtenrigzin/namsel_ocr:trained_02
+Pull [the version](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/tags/) you want by using the proper tag, listed on the Docker repository page:
 ```
-Please refer to the description in the Docker repository page, for more information on how to use it: [Namsel_OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/)
+docker pull thubtenrigzin/namsel_ocr:[tag]
+```
 
+For instance, *for the trained version 02*:
+```
+docker pull thubtenrigzin/namsel_ocr:trained_02
+```
+Please refer to the description, for more information on how to use it: [Namsel_OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/)
 
 ### On Linux:
 ```bash
