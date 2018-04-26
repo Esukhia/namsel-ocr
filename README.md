@@ -14,9 +14,7 @@ You can pull the image from the public repository:
 ```bash
 $ docker pull thubtenrigzin/namsel_ocr:trained_02
 ```
-Please refer to the description in the Docker repository page, for more information on how to use it:
-
-[Namsel_OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/)
+Please refer to the description in the Docker repository page, for more information on how to use it: [Namsel_OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/)
 
 
 ### On Linux:
