@@ -3,29 +3,29 @@ An OCR application focused on machine-print Tibetan text
 
 Tested on Ubuntu 14.04 and higher, Mac Os 10.13 High Sierra and Windows 7/10 (64bits).
 
-An overview of the Namsel project can be found in [our article in the journal Himalayan Linguistics](https://escholarship.org/uc/item/6d5781k5).
+An overview of the Namsel OCR project can be found in [our article in the journal Himalayan Linguistics](https://escholarship.org/uc/item/6d5781k5).
 
 Check out our library partner for already OCR'd digital text: http://tbrc.org. 
 
 ## Install:
-### Namsel_OCR is now on Docker!
-Namsel was built, trained and cleaned up to provide an instant use image availlable on any platforms!
+### Namsel OCR is now on Docker!
+Namsel OCR was built, trained and cleaned up to provide an instant use image availlable on any platforms!
 
-Pull [the version](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/tags/) you want by using the proper tag, listed on the Docker repository page:
+Pull [the version](https://hub.docker.com/r/thubtenrigzin/namsel-ocr/tags/) you want by using the proper tag, listed on the Docker repository page:
 ```
-docker pull thubtenrigzin/namsel_ocr:[tag]
+docker pull thubtenrigzin/namsel-ocr:[tag]
 ```
 
-For instance, *for the trained version 02*:
+For instance, *for the trained version 01*:
 ```
-docker pull thubtenrigzin/namsel_ocr:trained_02
+docker pull thubtenrigzin/namsel-ocr:trained-01
 ```
-Please refer to the description, for more information on how to use it: [Namsel_OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/)
+Please refer to the description, for more information on how to use it: [namsel-ocr on Docker](https://hub.docker.com/r/thubtenrigzin/namsel-ocr/)
 
-#### Sources of Namsel_OCR
+#### Sources of namsel-ocr
 Please refer to this repository for the source of the base built Docker image.
 
-The Docker source will take place on that repository: [Docker_Namsel_OCR](https://github.com/thubtenrigzin/Docker_Namsel_OCR)
+The Docker source will take place on that repository: [Docker_namsel-ocr](https://github.com/thubtenrigzin/docker-namsel-ocr)
 
 ### On Linux:
 ```bash
@@ -78,7 +78,7 @@ $ python namsel.py recognize-page --page_type=book --format=text ~/myfolder/out/
 OCR will run and save the results in a file called ocr_output.txt.
 
 ## Preprocessing
-Prior to using Namsel, documents in the form of PDFs or images need to be preprocessed. Preprocessing typically involves cleaning up images and putting them in a format Namsel expects.
+Prior to using Namsel OCR, documents in the form of PDFs or images need to be preprocessed. Preprocessing typically involves cleaning up images and putting them in a format Namsel OCR expects.
 
 ### Scanning documents
 If you are scanning the documents to be OCR'd yourself, here are some tips for improving chances of getting high quality OCR results:
@@ -110,7 +110,7 @@ This will convert all the pages in the pdf to tiff using the "Group 4" compressi
 
 Optionally, it has tools for page dewarping and manual erasing of image content. While not the only tool for image preprocessing, it typically delivers very good results and is easy to use. (A popular alternative is a project called unpaper).
 
-Scantailor has both a graphical and command line interface. The graphical interface is straightforward to use so we won't describe it here. For faster processing on multicore computers, it is ideal to use the command line version of scantailor in order to process pages in parallel. Namsel comes with a utility for batch, multicore processing with Scantailor called "scantailor_multicore.py."
+Scantailor has both a graphical and command line interface. The graphical interface is straightforward to use so we won't describe it here. For faster processing on multicore computers, it is ideal to use the command line version of scantailor in order to process pages in parallel. Namsel OCR comes with a utility for batch, multicore processing with Scantailor called "scantailor_multicore.py."
 
 Example:
 ```bash
@@ -127,7 +127,7 @@ $ python scantailor_multicore.py my-image-folder -20
 
 ...generates a folder called "out" with images that have been cropped, cleaned, thinned, and deskewed by Scantailor.
 
-Alternatively, you can choose to run scantailor from the the Namsel command line. See the section Preprocessing options below.
+Alternatively, you can choose to run scantailor from the the Namsel OCR command line. See the section Preprocessing options below.
 
 ### Converting TIFF to Group 4 compression
 By default, Scantailor saves images in tiff format using the "lzw" compression format. This format is fine for grayscale and color images, but is unnecessary for black and white images. For black and white tif, convert images to Group 4 (G4) compression if possible. Using the tiffcp utility (part of the libtiff library), convert an entire folder of tiff images like so:
@@ -160,30 +160,30 @@ The amount of thinning or thickening Scantailor will do. Good values are between
 Example command:
 
 ```bash
-$ python namsel preprocess --layout=double --st_threshold=-15 /path/to/my-folder-of-tiffs
+$ python namsel.py preprocess --layout=double --st_threshold=-15 /path/to/my-folder-of-tiffs
 ```
 
 This command will run Scantailor on a folder of tiff-formatted images, command it to split double pages and apply thinning to the characters on the pages.
-### Namsel command line options
-To run Namsel, simply specify the action you'd like Namsel to take and point the the image or images you would like processed. For example, to OCR a single tif image, run:
+### Namsel OCR command line options
+To run Namsel, simply specify the action you'd like Namsel OCR to take and point the the image or images you would like processed. For example, to OCR a single tif image, run:
 
 ```bash
-$ python namsel recognize-page mytibetantextimage.tif
+$ python namsel.py recognize-page mytibetantextimage.tif
 ```
 
 For an entire volume:
 ```bash
-$ python namsel recognize-volume folder-of-tiff-images
+$ python namsel.py recognize-volume folder-of-tiff-images
 ```
 
-Other options are "preprocess" and "isolate-lines." Preprocessing is discussed below. "Isolate-lines" runs the Namsel pipeline, but only until the line separation stage and outputs the segmented lines as tif images in a directory called "separated-lines" that is created within the parent directory. (TO BE IMPLEMENTED)
+Other options are "preprocess" and "isolate-lines." Preprocessing is discussed below. "Isolate-lines" runs the Namsel OCR pipeline, but only until the line separation stage and outputs the segmented lines as tif images in a directory called "separated-lines" that is created within the parent directory. (TO BE IMPLEMENTED)
 
-OCR quality can vary widely depending on the runtime configuration being used. Below is a list of tunable configuration parameters that Namsel uses. 
+OCR quality can vary widely depending on the runtime configuration being used. Below is a list of tunable configuration parameters that Namsel OCR uses. 
 
 
   **--page_type**
   
-Choices "book" or "pecha." If not specified, Namsel will attempt to determine the page type based on the length and height of the page.
+Choices "book" or "pecha." If not specified, Namsel OCR will attempt to determine the page type based on the length and height of the page.
 
 
   **--recognizer**
@@ -193,7 +193,7 @@ This is the type of recognizer that is used. The options are "hmm" and "probout.
 
   **--line_break_method**
   
-Options are "line_cut" and "line_cluster." Namsel will attempt to choose for you if this is left unspecified. Generally, "line_cut" works well for book-style pages and "line_cluster" works well for pecha and book-style pages.
+Options are "line_cut" and "line_cluster." Namsel OCR will attempt to choose for you if this is left unspecified. Generally, "line_cut" works well for book-style pages and "line_cluster" works well for pecha and book-style pages.
 
   **--break_width** 
   
@@ -256,4 +256,4 @@ python font_draw.py
 ```
 
 ### About the name
-Namsel is an English rendering of the Tibetan རྣམ་གསལ (transliterated: rnam gsal). Literally translated, རྣམ can be thought of as "thorough" or "in detail" and གསལ can be thought of as "clear", "illuminated." Put together, Namsel can be taken to mean "making clear the details" or "thoroughly illuminating," which are both appropriate descriptions of what the Namsel project is trying to do. Practically speaking, the name was also chosen because it is reasonably easy for non-Tibetan speakers to read and pronounce correctly.
+Namsel OCR is an English rendering of the Tibetan རྣམ་གསལ (transliterated: rnam gsal). Literally translated, རྣམ can be thought of as "thorough" or "in detail" and གསལ can be thought of as "clear", "illuminated." Put together, Namsel OCR can be taken to mean "making clear the details" or "thoroughly illuminating," which are both appropriate descriptions of what the Namsel OCR project is trying to do. Practically speaking, the name was also chosen because it is reasonably easy for non-Tibetan speakers to read and pronounce correctly.
