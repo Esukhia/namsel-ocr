@@ -22,6 +22,8 @@ docker pull thubtenrigzin/namsel-ocr:trained-01
 ```
 Please refer to the description, for more information on how to use it: [Namsel OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel-ocr/)
 
+Based on this image, an other project [docker-namsel-ocr](https://cloud.docker.com/swarm/thubtenrigzin/repository/docker/thubtenrigzin/docker-namsel-ocr/general) is settled in order to automate all the process of Namsel OCR.
+
 #### Sources of namsel-ocr
 Please refer to this repository for the source of the base built Docker image.
 
