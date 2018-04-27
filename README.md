@@ -20,12 +20,12 @@ For instance, *for the trained version 01*:
 ```
 docker pull thubtenrigzin/namsel-ocr:trained-01
 ```
-Please refer to the description, for more information on how to use it: [namsel-ocr on Docker](https://hub.docker.com/r/thubtenrigzin/namsel-ocr/)
+Please refer to the description, for more information on how to use it: [Namsel OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel-ocr/)
 
 #### Sources of namsel-ocr
 Please refer to this repository for the source of the base built Docker image.
 
-The Docker source will take place on that repository: [Docker_namsel-ocr](https://github.com/thubtenrigzin/docker-namsel-ocr)
+The Docker source will take place on that repository: [Docker-namsel-ocr](https://github.com/thubtenrigzin/docker-namsel-ocr)
 
 ### On Linux:
 ```bash
