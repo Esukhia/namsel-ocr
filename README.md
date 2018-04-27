@@ -22,6 +22,11 @@ docker pull thubtenrigzin/namsel_ocr:trained_02
 ```
 Please refer to the description, for more information on how to use it: [Namsel_OCR on Docker](https://hub.docker.com/r/thubtenrigzin/namsel_ocr/)
 
+#### Sources of Namsel_OCR
+Please refer to this repository for the source of the base built Docker image.
+
+The Docker source will take place on that repository: [Docker_Namsel_OCR](https://github.com/thubtenrigzin/Docker_Namsel_OCR)
+
 ### On Linux:
 ```bash
 $ bash ubuntu_install.sh
