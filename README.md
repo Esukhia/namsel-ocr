@@ -25,7 +25,7 @@ Please refer to the description, for more information on how to use it: [Namsel 
 #### Sources of namsel-ocr
 Please refer to this repository for the source of the base built Docker image.
 
-The Docker source will take place on that repository: [Docker-namsel-ocr](https://github.com/thubtenrigzin/docker-namsel-ocr)
+The Docker source will take place on that repository: [docker-namsel-ocr](https://github.com/thubtenrigzin/docker-namsel-ocr)
 
 ### On Linux:
 ```bash
