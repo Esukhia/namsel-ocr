@@ -142,7 +142,7 @@ class PageRecognizer(object):
     
                 output.append(u'\n')
     
-            out =  ''.join(output)
+            out =  ''.join(output).encode('utf-8')
             
             if platform.system() != "Windows":
                 print out
@@ -362,6 +362,6 @@ if __name__ == '__main__':
                     if not isinstance(r, str) and not isinstance(r, unicode):
                         r = 'No content captured'
 
-                    outfile.write(r + '\n\n')
+                    outfile.write(r.decode('utf-8') + '\n\n')
     elif args.action == 'preprocess':
         run_scantailor(args.imagepath, args.threshold, layout=args.layout)

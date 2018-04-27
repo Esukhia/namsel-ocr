@@ -233,7 +233,7 @@ class PageElements(object):
             if is_emph_symbol:
                 self.emph_symbols.append(i)
                 
-                print 'EMPHSYMBOLFOUND', quick_prd
+                print 'EMPHSYMBOLFOUND', quick_prd.encode('utf-8')
 #                 cv.rectangle(self.img_arr, (x,y), (x+w, y+h), 0)
             elif quick_prd == u'ོ' and self.detect_o:
                 self.naros.append(i)
