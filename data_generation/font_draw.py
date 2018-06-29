@@ -249,15 +249,9 @@ def draw_fonts(args):
             pangocairo_context.update_layout(layout)
             pangocairo_context.show_layout(layout)
             
-            if platform.system() == "Windows":
-                fname = r"\tmp\%s%d.png" % (fontname, randint(0,20000000))
-            else:
-                fname = "/tmp/%s%d.png" % (fontname, randint(0,20000000))
+            im = Image.frombuffer("RGBA", (surf.get_width(), surf.get_height()), surf.get_data(), "raw", "RGBA",0 ,1)
+            im = im.convert('L')
             
-            with io.BytesIO() as image_file:
-                surf.write_to_png(image_file)
-                im = Image.open(image_file)
-                im = im.convert('L')
             a = np.asarray(im)
             a = trim(a)
             a = add_padding(a, padding=2)
