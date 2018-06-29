@@ -11,6 +11,7 @@ import cv2
 from scipy.ndimage.morphology import binary_erosion
 from random import randint
 import os
+import io
 
 sys.path.append('..')
 from yik import *
@@ -253,12 +254,10 @@ def draw_fonts(args):
             else:
                 fname = "/tmp/%s%d.png" % (fontname, randint(0,20000000))
             
-            with open(fname, "wb") as image_file:
-                    surf.write_to_png(image_file)
-        
-            im = Image.open(fname)
-            im = im.convert('L')
-            os.remove(fname)
+            with io.BytesIO() as image_file:
+                surf.write_to_png(image_file)
+                im = Image.open(image_file)
+                im = im.convert('L')
             a = np.asarray(im)
             a = trim(a)
             a = add_padding(a, padding=2)
